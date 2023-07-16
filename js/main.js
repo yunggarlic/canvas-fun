@@ -32,7 +32,6 @@ function draw(e) {
 	if (!painting) return;
 	ctx.lineWidth = 5;
 	ctx.lineCap = "round";
-	console.dir(e);
 
 	ctx.lineTo(e.offsetX, e.offsetY);
 	ctx.stroke();
