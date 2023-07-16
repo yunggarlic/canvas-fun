@@ -1,7 +1,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-let togglePainting = true;
+let painting = false;
+let paintingAllowed = true;
 let states = [];
 
 /**
@@ -9,7 +10,8 @@ let states = [];
  * @param {Event} e - The mousedown event
  */
 function startPosition(e) {
-	if (!togglePainting) return;
+	if (!paintingAllowed) return;
+	painting = true;
 	draw(e);
 }
 
@@ -17,7 +19,7 @@ function startPosition(e) {
  * Finish drawing when the mouse button is released
  */
 function finishedPosition() {
-	if (!togglePainting) return;
+	painting = false;
 	ctx.beginPath();
 	states.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
 }
@@ -30,6 +32,7 @@ function draw(e) {
 	if (!painting) return;
 	ctx.lineWidth = 5;
 	ctx.lineCap = "round";
+	console.dir(e);
 
 	ctx.lineTo(e.offsetX, e.offsetY);
 	ctx.stroke();
@@ -42,6 +45,7 @@ function draw(e) {
  */
 function undo() {
 	if (states.length > 0) {
+		console.log(ctx.createImageData(canvas.width, canvas.height));
 		states.pop();
 		ctx.putImageData(
 			states[states.length - 1] ||
@@ -52,8 +56,8 @@ function undo() {
 	}
 }
 
-function toggleDrawing(e) {
-	togglePainting = !togglePainting;
+function allowPainting(e) {
+	paintingAllowed = !paintingAllowed;
 	this.classList.toggle("active");
 }
 
@@ -62,4 +66,4 @@ canvas.addEventListener("mouseup", finishedPosition);
 canvas.addEventListener("mousemove", draw);
 
 document.getElementById("undo").addEventListener("click", undo);
-document.getElementById("toggle").addEventListener("click", toggleDrawing);
+document.getElementById("toggle").addEventListener("click", allowPainting);
