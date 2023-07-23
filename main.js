@@ -135,10 +135,6 @@ const main = () => {
   document.getElementById("redo").addEventListener("click", redo);
   document.getElementById("save").addEventListener("click", save);
   document.getElementById("load").addEventListener("click", load);
-
-  if (initialState) {
-    redraw();
-  }
 };
 
 main();
