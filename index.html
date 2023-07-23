@@ -6,16 +6,19 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <canvas id="canvas" width="400" height="300"></canvas>
-        <button id="undo">Undo</button>
-        <button id="redo">Redo</button>
-        <button id="save">Save</button>
-        <button id="load">Load</button>
+        <div class="container">
+			<div class="sidebar">
+                <button id="undo">Undo</button>
+                <button id="redo">Redo</button>
+                <button id="save">Save</button>
+                <button id="load">Load</button>
+			</div>
+            <canvas id="canvas" width="400" height="300"></canvas>
+		</div>
 
-
-        <script src="main.js" defer></script>
+        <script src="js/main.js" defer></script>
     </body>
 </html>
